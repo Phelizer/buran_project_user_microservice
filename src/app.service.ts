@@ -1,8 +1,22 @@
 import { Injectable } from '@nestjs/common';
 
+function mockUser() {
+  return {
+    login: (Math.random() + 1).toString(36).substring(7),
+    id: (Math.random() + 1).toString(36).substring(2),
+    roles: ['user'],
+  };
+}
+
+export interface User {
+  login: string;
+  id: string;
+  roles: string[];
+}
+
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Hello World!';
+  async getUsers(): Promise<User[]> {
+    return [mockUser(), mockUser(), mockUser()];
   }
 }
