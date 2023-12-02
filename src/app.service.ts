@@ -16,7 +16,7 @@ export interface User {
 
 @Injectable()
 export class AppService {
-  async getUsers(): Promise<User[]> {
-    return [mockUser(), mockUser(), mockUser()];
+  async getUser(id: string): Promise<User> {
+    return mockUser();
   }
 }
