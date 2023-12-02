@@ -1,7 +1,7 @@
 import { Controller } from '@nestjs/common';
 import { AppService, User } from './app.service';
-import { GrpcMethod } from '@nestjs/microservices';
-import { Metadata, ServerUnaryCall } from '@grpc/grpc-js';
+import { GrpcMethod, RpcException } from '@nestjs/microservices';
+import { Metadata, ServerUnaryCall, status } from '@grpc/grpc-js';
 
 interface WithID {
   id: string;
@@ -18,6 +18,15 @@ export class AppController {
     call: ServerUnaryCall<unknown, unknown>,
   ): Promise<User> {
     const { id } = data;
-    return await this.appService.getUser(id);
+    const user = await this.appService.getUser(id);
+
+    if (!user) {
+      throw new RpcException({
+        code: status.NOT_FOUND,
+        message: `User with ID "${id}" not found`,
+      });
+    }
+
+    return user;
   }
 }

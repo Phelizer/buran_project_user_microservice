@@ -1,6 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { USER_MODEL_NAME } from './schemas/user.schema';
+import { Model } from 'mongoose';
 
-function mockUser() {
+export function mockUser() {
   return {
     login: (Math.random() + 1).toString(36).substring(7),
     id: (Math.random() + 1).toString(36).substring(2),
@@ -16,7 +19,12 @@ export interface User {
 
 @Injectable()
 export class AppService {
+  constructor(
+    @InjectModel(USER_MODEL_NAME) private readonly userModel: Model<User>,
+  ) {}
+
   async getUser(id: string): Promise<User> {
-    return mockUser();
+    const user = await this.userModel.findOne({ id });
+    return user;
   }
 }
