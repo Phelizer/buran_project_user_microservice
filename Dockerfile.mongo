@@ -1,0 +1,7 @@
+FROM mongo
+
+COPY seedScript.js /docker-entrypoint-initdb.d/
+
+ENV MONGO_INITDB_DATABASE=user_service_db0
+
+CMD ["mongod"]
