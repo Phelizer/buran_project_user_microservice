@@ -1,7 +1,7 @@
 version: '3.1'
 
 services:
-  mongo:
+  mongodb:
     image: mongo
     restart: always
     environment:
@@ -12,5 +12,18 @@ services:
     volumes:
       - mongo_data:/data/db
 
+  app:
+    build: .
+    ports:
+      - 5000:5000
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - mongodb
+    links:
+      - "mongodb:database"
+
+
 volumes:
   mongo_data:
+  
