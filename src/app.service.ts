@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { USER_MODEL_NAME } from './schemas/user.schema';
 import { Model } from 'mongoose';
+import { User } from './models/user.model';
 
 export function mockUser() {
   return {
@@ -9,12 +10,6 @@ export function mockUser() {
     id: (Math.random() + 1).toString(36).substring(2),
     roles: ['user'],
   };
-}
-
-export interface User {
-  login: string;
-  id: string;
-  roles: string[];
 }
 
 @Injectable()
