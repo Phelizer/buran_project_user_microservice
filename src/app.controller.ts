@@ -1,7 +1,8 @@
 import { Controller } from '@nestjs/common';
-import { AppService, User } from './app.service';
+import { AppService } from './app.service';
 import { GrpcMethod, RpcException } from '@nestjs/microservices';
 import { Metadata, ServerUnaryCall, status } from '@grpc/grpc-js';
+import { User } from './models/user.model';
 
 interface WithID {
   id: string;

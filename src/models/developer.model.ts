@@ -1,3 +1,3 @@
-import { Company } from './Company.model';
+import { Company } from './company.model';
 
 export type Developer = Company;
