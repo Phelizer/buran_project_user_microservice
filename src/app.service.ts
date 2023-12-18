@@ -4,14 +4,6 @@ import { USER_MODEL_NAME } from './schemas/user.schema';
 import { Model } from 'mongoose';
 import { User } from './models/user.model';
 
-export function mockUser() {
-  return {
-    login: (Math.random() + 1).toString(36).substring(7),
-    id: (Math.random() + 1).toString(36).substring(2),
-    roles: ['user'],
-  };
-}
-
 @Injectable()
 export class AppService {
   constructor(
