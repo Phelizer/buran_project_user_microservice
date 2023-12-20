@@ -16,6 +16,6 @@ jobs:
           DOCKERHUB_LOGIN: ${{ secrets.DOCKERHUB_LOGIN }}
           DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
         run: |
-          docker build -t user_service:latest -f Dockerfile.app .
+          docker build -t $DOCKERHUB_LOGIN/user_service:latest -f Dockerfile.app .
           echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_LOGIN --password-stdin
-          docker push user_service:latest
+          docker push $DOCKERHUB_LOGIN/user_service:latest
