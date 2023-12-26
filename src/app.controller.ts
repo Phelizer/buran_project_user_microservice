@@ -8,6 +8,10 @@ interface WithID {
   id: string;
 }
 
+interface UserIDs {
+  user_ids: string[];
+}
+
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
@@ -29,5 +33,15 @@ export class AppController {
     }
 
     return user;
+  }
+
+  @GrpcMethod('Users', 'GetManyUsers')
+  async getManyUsers(
+    data: UserIDs,
+    metadata: Metadata,
+    call: ServerUnaryCall<unknown, unknown>,
+  ): Promise<{ users: User[] }> {
+    const users = await this.appService.getManyUsers(data.user_ids);
+    return { users };
   }
 }

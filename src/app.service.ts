@@ -14,4 +14,9 @@ export class AppService {
     const user = await this.userModel.findOne({ id });
     return user;
   }
+
+  async getManyUsers(user_ids: string[]): Promise<User[]> {
+    const users = await this.userModel.find({ id: { $in: user_ids } });
+    return users;
+  }
 }

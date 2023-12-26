@@ -12,6 +12,9 @@ async function bootstrap() {
         package: 'users',
         protoPath: join(__dirname, 'users.proto'),
         url: '0.0.0.0:5000',
+        loader: {
+          keepCase: true,
+        },
       },
     },
   );
