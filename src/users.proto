@@ -4,6 +4,7 @@ package users;
 
 service Users {
     rpc GetUser (GetUserRequest) returns (User) {}
+    rpc GetManyUsers (GetManyUsersRequest) returns (ManyUsers) {}
 }
 
 message GetUserRequest {
@@ -19,4 +20,12 @@ message User {
     uint32 age = 6;
     string sex = 7;
     repeated string roles = 8;
+}
+
+message GetManyUsersRequest {
+    repeated string user_ids = 1;
+}
+
+message ManyUsers {
+    repeated User users = 1;
 }
